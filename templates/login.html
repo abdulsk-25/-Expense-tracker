@@ -1,93 +1,152 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Info - Expense Tracker</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #e0f7fa;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            margin: 0;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Expense Tracker</title>
 
-        .login-container {
-            background: white;
-            padding: 30px 40px;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-            max-width: 400px;
-            width: 100%;
-        }
+<style>
 
-        h2 {
-            text-align: center;
-            margin-bottom: 20px;
-            color: #00796b;
-        }
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
 
-        label {
-            font-weight: bold;
-            display: block;
-            margin-top: 10px;
-            margin-bottom: 5px;
-            color: #333;
-        }
+body{
+    font-family:'Segoe UI',sans-serif;
+    background:linear-gradient(135deg,#0f172a,#1e293b,#334155);
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
 
-        input[type="text"],
-        input[type="number"],
-        select {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 20px;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-            font-size: 1em;
-        }
+.login-container{
+    width:100%;
+    max-width:450px;
+    background:rgba(255,255,255,0.95);
+    backdrop-filter:blur(10px);
+    padding:40px;
+    border-radius:20px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.3);
+}
 
-        button {
-            width: 100%;
-            padding: 12px;
-            background-color: #00796b;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            font-size: 1em;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
+.logo{
+    font-size:50px;
+    text-align:center;
+    margin-bottom:10px;
+}
 
-        button:hover {
-            background-color: #004d40;
-        }
-    </style>
+h2{
+    text-align:center;
+    color:#0f172a;
+    margin-bottom:10px;
+}
+
+.subtitle{
+    text-align:center;
+    color:#64748b;
+    margin-bottom:30px;
+    font-size:14px;
+}
+
+label{
+    display:block;
+    margin-bottom:8px;
+    color:#334155;
+    font-weight:600;
+}
+
+input,
+select{
+    width:100%;
+    padding:12px;
+    border:1px solid #cbd5e1;
+    border-radius:10px;
+    margin-bottom:20px;
+    font-size:15px;
+}
+
+input:focus,
+select:focus{
+    outline:none;
+    border-color:#14b8a6;
+}
+
+button{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:10px;
+    background:linear-gradient(135deg,#14b8a6,#0f766e);
+    color:white;
+    font-size:16px;
+    font-weight:600;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+button:hover{
+    transform:translateY(-2px);
+}
+
+.footer-text{
+    text-align:center;
+    margin-top:20px;
+    color:#64748b;
+    font-size:13px;
+}
+
+</style>
+
 </head>
+
 <body>
-    <div class="login-container">
-        <h2>User Information</h2>
-        <form action="/start" method="POST">
-            <label for="name">Name</label>
-            <input type="text" id="name" name="name" placeholder="Your Name" required>
 
-            <label for="age">Age</label>
-            <input type="number" id="age" name="age" placeholder="Your Age" min="1" max="120" required>
+<div class="login-container">
 
-            <label for="job">Job Title</label>
-            <select id="job" name="job" required>
-                <option value="" disabled selected>Select your job</option>
-                <option value="Software Engineer">Software Engineer</option>
-                <option value="Teacher">Teacher</option>
-                <option value="Student">Student</option>
-                <option value="Self-employed">Self-employed</option>
-                <option value="Other">Other</option>
-            </select>
+    <div class="logo">💰</div>
 
-            <button type="submit">Start Tracking</button>
-        </form>
+    <h2>Welcome to Expense Tracker</h2>
+
+    <p class="subtitle">
+        Track your income and expenses with ease
+    </p>
+
+    <form action="/start" method="POST">
+
+        <label>Name</label>
+        <input
+            type="text"
+            name="name"
+            placeholder="Enter your name"
+            required
+        >
+
+        <label>Occupation</label>
+        <select name="job" required>
+            <option value="" disabled selected>Select Occupation</option>
+            <option value="Software Engineer">Software Engineer</option>
+            <option value="Teacher">Teacher</option>
+            <option value="Student">Student</option>
+            <option value="Self-employed">Self-employed</option>
+            <option value="Business">Business</option>
+            <option value="Other">Other</option>
+        </select>
+
+        <button type="submit">
+            Start Tracking
+        </button>
+
+    </form>
+
+    <div class="footer-text">
+        Personal Finance Management System
     </div>
+
+</div>
+
 </body>
 </html>
