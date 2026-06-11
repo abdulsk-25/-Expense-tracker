@@ -5,136 +5,216 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Expense Tracker</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f0f0f0;
-      padding: 20px;
-    }
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
 
-    .container {
-      max-width: 1000px;
-      margin: auto;
-      background: white;
-      padding: 20px;
-      border-radius: 8px;
-      text-align: center;
-    }
+body{
+  font-family:'Segoe UI',sans-serif;
+  background: linear-gradient(135deg,#0f172a,#1e293b,#334155);
+  min-height:100vh;
+  padding:30px 20px;
+}
 
-    h1 {
-      background-color: #00796b;
-      color: white;
-      padding: 12px 20px;
-      border-radius: 8px;
-      display: inline-block;
-      margin-bottom: 25px;
-      box-shadow: 0 2px 6px rgba(0, 121, 107, 0.4);
-      transition: background-color 0.3s ease, transform 0.3s ease;
-    }
+.container{
+  max-width:1100px;
+  margin:auto;
+  background:rgba(255,255,255,0.96);
+  backdrop-filter:blur(10px);
+  padding:30px;
+  border-radius:20px;
+  text-align:center;
+  box-shadow:0 10px 30px rgba(0,0,0,0.25);
+}
 
-    h1:hover {
-      background-color: #004d40;
-      transform: scale(1.05);
-    }
+h1{
+  background:linear-gradient(135deg,#14b8a6,#0f766e);
+  color:white;
+  padding:15px 25px;
+  border-radius:12px;
+  display:inline-block;
+  margin-bottom:25px;
+  box-shadow:0 5px 15px rgba(20,184,166,0.4);
+  transition:0.3s ease;
+}
 
-    .section {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      justify-content: center;
-      margin-bottom: 20px;
-      padding: 10px;
-      background: #f7f7f7;
-      border-radius: 6px;
-    }
+h1:hover{
+  transform:translateY(-3px);
+}
 
-    input, button, select {
-      padding: 10px;
-      font-size: 1em;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-    }
+h2{
+  color:#0f172a;
+  margin-bottom:15px;
+}
 
-    .clear-button {
-      background-color: #d9534f;
-      color: white;
-      padding: 10px 16px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background-color 0.3s ease, transform 0.2s ease;
-    }
+.user-info{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:15px;
+  flex-wrap:wrap;
+  margin-bottom:25px;
+  background:#f8fafc;
+  padding:15px;
+  border-radius:12px;
+}
 
-    .clear-button:hover {
-      background-color: #c9302c;
-      transform: scale(1.05);
-    }
+.user-info p{
+  margin:0;
+  color:#334155;
+  font-weight:500;
+}
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 20px 0;
-    }
+.section{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  justify-content:center;
+  margin-bottom:20px;
+  padding:15px;
+  background:#f8fafc;
+  border-radius:12px;
+  box-shadow:0 2px 10px rgba(0,0,0,0.08);
+}
 
-    th, td {
-      padding: 10px;
-      border-bottom: 1px solid #ccc;
-      text-align: center;
-    }
+input,
+select,
+button{
+  padding:12px;
+  border-radius:10px;
+  border:1px solid #cbd5e1;
+  font-size:15px;
+}
 
-    #chartType {
-      margin-bottom: 10px;
-    }
+input:focus,
+select:focus{
+  outline:none;
+  border-color:#14b8a6;
+}
 
-    #financeChart {
-      max-width: 400px;
-      margin: 0 auto;
-    }
+button{
+  background:#0f766e;
+  color:white;
+  border:none;
+  cursor:pointer;
+  transition:0.3s;
+  font-weight:600;
+}
 
-    .logout-btn {
-      background-color: #777;
-      color: white;
-      border: none;
-      padding: 6px 10px;
-      font-size: 0.85em;
-      border-radius: 4px;
-      margin-left: 10px;
-      cursor: pointer;
-    }
+button:hover{
+  background:#115e59;
+  transform:translateY(-2px);
+}
 
-    .logout-btn:hover {
-      background-color: #555;
-    }
+.clear-button{
+  background:#dc2626;
+}
 
-    .user-info {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-bottom: 20px;
-    }
+.clear-button:hover{
+  background:#b91c1c;
+}
 
-    .user-info p {
-      margin: 0;
-    }
+.logout-btn{
+  background:#475569;
+  padding:10px 14px;
+}
 
-    .flex-display {
-      display: flex;
-      gap: 20px;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      margin-top: 20px;
-    }
+.logout-btn:hover{
+  background:#334155;
+}
 
-    .chart-container, .expense-table {
-      flex: 1;
-      min-width: 300px;
-      background: #f9f9f9;
-      padding: 15px;
-      border-radius: 6px;
-    }
-    
-  </style>
+.overview{
+  background:#f8fafc;
+  padding:20px;
+  border-radius:15px;
+  margin-bottom:25px;
+  box-shadow:0 2px 10px rgba(0,0,0,0.08);
+}
+
+.overview ul{
+  list-style:none;
+}
+
+.overview li{
+  margin:12px 0;
+  font-size:18px;
+}
+
+.flex-display{
+  display:flex;
+  gap:20px;
+  flex-wrap:wrap;
+  margin-top:20px;
+}
+
+.chart-container,
+.expense-table{
+  flex:1;
+  min-width:320px;
+  background:white;
+  padding:20px;
+  border-radius:15px;
+  box-shadow:0 5px 15px rgba(0,0,0,0.08);
+}
+
+#chartType{
+  margin-bottom:15px;
+}
+
+#financeChart{
+  max-width:450px;
+  margin:auto;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:15px;
+}
+
+th{
+  background:#0f766e;
+  color:white;
+}
+
+th,
+td{
+  padding:12px;
+  border-bottom:1px solid #e2e8f0;
+  text-align:center;
+}
+
+tr:hover{
+  background:#f8fafc;
+}
+
+@media(max-width:768px){
+
+  .container{
+    padding:20px;
+  }
+
+  .section{
+    flex-direction:column;
+  }
+
+  .user-info{
+    flex-direction:column;
+  }
+
+  .flex-display{
+    flex-direction:column;
+  }
+
+  input,
+  select,
+  button{
+    width:100%;
+  }
+}
+</style>
 </head>
 <body>
   
@@ -143,7 +223,7 @@
 
     <div class="user-info">
       <p><strong>User:</strong> {{ session.get('name') }}</p>
-      <p><strong>Age:</strong> {{ session.get('age') }}</p>
+      <!--<p><strong>Age:</strong> {{ session.get('age') }}</p>-->
       <p><strong>Job:</strong> {{ session.get('job') }}</p>
       <form action="/logout" method="POST" style="display:inline;">
         <button type="submit" class="logout-btn">Logout</button>
@@ -179,14 +259,18 @@
     <!-- Expense Section -->
     <div class="section">
       <form action="/add" method="POST">
-        <input type="number" name="amount" placeholder="Amount" required step="0.01">
+        <input type="number" name="amount" placeholder="Amount Spent" required step="0.01">
         <select name="category" required>
           <option value="" disabled selected>Select Category</option>
-          <option>Food</option>
-          <option>Transport</option>
-          <option>Rent</option>
-          <option>Entertainment</option>
-          <option>Other</option>
+         <option>Food</option>
+<option>Transport</option>
+<option>Rent</option>
+<option>Entertainment</option>
+<option>Shopping</option>
+<option>Medical</option>
+<option>Education</option>
+<option>Bills</option>
+<option>Other</option>
         </select>
         <input type="date" name="date" id="dateInput">
         <button type="submit">Add Expense</button>
