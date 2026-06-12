@@ -13,35 +13,34 @@
 
 body{
   font-family:'Segoe UI',sans-serif;
-  background: linear-gradient(135deg,#0f172a,#1e293b,#334155);
+  background:linear-gradient(135deg,#0f172a,#1e293b,#334155);
   min-height:100vh;
   padding:30px 20px;
 }
 
 .container{
-  max-width:1100px;
+  max-width:1150px;
   margin:auto;
-  background:rgba(255,255,255,0.96);
-  backdrop-filter:blur(10px);
-  padding:30px;
+  background:rgba(255,255,255,0.97);
+  backdrop-filter:blur(12px);
+  padding:35px;
   border-radius:20px;
-  text-align:center;
-  box-shadow:0 10px 30px rgba(0,0,0,0.25);
+  box-shadow:0 15px 40px rgba(0,0,0,0.25);
 }
 
 h1{
   background:linear-gradient(135deg,#14b8a6,#0f766e);
   color:white;
-  padding:15px 25px;
-  border-radius:12px;
+  padding:18px 35px;
+  border-radius:14px;
   display:inline-block;
-  margin-bottom:25px;
-  box-shadow:0 5px 15px rgba(20,184,166,0.4);
-  transition:0.3s ease;
+  margin-bottom:35px;
+  box-shadow:0 8px 20px rgba(20,184,166,0.4);
+  transition:.3s;
 }
 
 h1:hover{
-  transform:translateY(-3px);
+  transform:translateY(-4px);
 }
 
 h2{
@@ -49,40 +48,64 @@ h2{
   margin-bottom:15px;
 }
 
+/* USER BAR */
+
 .user-info{
   display:flex;
-  justify-content:center;
+  justify-content:space-between;
   align-items:center;
-  gap:15px;
-  flex-wrap:wrap;
-  margin-bottom:25px;
   background:#f8fafc;
-  padding:15px;
-  border-radius:12px;
+  padding:18px 25px;
+  border-radius:15px;
+  margin-bottom:30px;
+  box-shadow:0 3px 10px rgba(0,0,0,.08);
 }
 
-.user-info p{
-  margin:0;
-  color:#334155;
-  font-weight:500;
+.user-details{
+  display:flex;
+  gap:25px;
+  align-items:center;
 }
+
+.user-details p{
+  font-size:16px;
+  color:#334155;
+  font-weight:600;
+}
+
+.logout-btn{
+  background:#475569;
+  color:white;
+  border:none;
+  padding:12px 20px;
+  border-radius:10px;
+  cursor:pointer;
+  font-weight:600;
+  transition:.3s;
+}
+
+.logout-btn:hover{
+  background:#334155;
+}
+
+/* FORMS */
 
 .section{
   display:flex;
   gap:12px;
   flex-wrap:wrap;
   justify-content:center;
-  margin-bottom:20px;
-  padding:15px;
+  margin-bottom:25px;
+  padding:18px;
   background:#f8fafc;
-  border-radius:12px;
-  box-shadow:0 2px 10px rgba(0,0,0,0.08);
+  border-radius:15px;
+  box-shadow:0 3px 10px rgba(0,0,0,.08);
 }
 
 input,
 select,
 button{
-  padding:12px;
+  padding:12px 14px;
   border-radius:10px;
   border:1px solid #cbd5e1;
   font-size:15px;
@@ -99,8 +122,8 @@ button{
   color:white;
   border:none;
   cursor:pointer;
-  transition:0.3s;
   font-weight:600;
+  transition:.3s;
 }
 
 button:hover{
@@ -116,37 +139,68 @@ button:hover{
   background:#b91c1c;
 }
 
-.logout-btn{
-  background:#475569;
-  padding:10px 14px;
-}
-
-.logout-btn:hover{
-  background:#334155;
-}
+/* OVERVIEW */
 
 .overview{
-  background:#f8fafc;
-  padding:20px;
-  border-radius:15px;
-  margin-bottom:25px;
-  box-shadow:0 2px 10px rgba(0,0,0,0.08);
+  margin-bottom:30px;
 }
 
-.overview ul{
-  list-style:none;
+.overview h2{
+  text-align:center;
+  margin-bottom:20px;
 }
 
-.overview li{
-  margin:12px 0;
-  font-size:18px;
+.overview-cards{
+  display:flex;
+  gap:20px;
+  justify-content:center;
+  flex-wrap:wrap;
 }
+
+.card{
+  flex:1;
+  min-width:250px;
+  background:white;
+  border-radius:18px;
+  padding:25px;
+  text-align:center;
+  box-shadow:0 6px 20px rgba(0,0,0,.08);
+  transition:.3s;
+}
+
+.card:hover{
+  transform:translateY(-5px);
+}
+
+.card h3{
+  color:#64748b;
+  margin-bottom:12px;
+  font-size:16px;
+}
+
+.card p{
+  font-size:28px;
+  font-weight:700;
+}
+
+.salary{
+  color:#2563eb;
+}
+
+.expense{
+  color:#dc2626;
+}
+
+.balance{
+  color:#16a34a;
+}
+
+/* CHART + TABLE */
 
 .flex-display{
   display:flex;
   gap:20px;
   flex-wrap:wrap;
-  margin-top:20px;
 }
 
 .chart-container,
@@ -155,8 +209,8 @@ button:hover{
   min-width:320px;
   background:white;
   padding:20px;
-  border-radius:15px;
-  box-shadow:0 5px 15px rgba(0,0,0,0.08);
+  border-radius:18px;
+  box-shadow:0 5px 15px rgba(0,0,0,.08);
 }
 
 #chartType{
@@ -190,17 +244,25 @@ tr:hover{
   background:#f8fafc;
 }
 
+/* MOBILE */
+
 @media(max-width:768px){
 
   .container{
     padding:20px;
   }
 
-  .section{
+  .user-info{
     flex-direction:column;
+    gap:15px;
   }
 
-  .user-info{
+  .user-details{
+    flex-direction:column;
+    gap:10px;
+  }
+
+  .section{
     flex-direction:column;
   }
 
@@ -220,16 +282,30 @@ tr:hover{
   
   <div class="container">
     <h1>Expense Tracker</h1>
+<div class="overview">
 
-    <div class="user-info">
-      <p><strong>User:</strong> {{ session.get('name') }}</p>
-      <!--<p><strong>Age:</strong> {{ session.get('age') }}</p>-->
-      <p><strong>Job:</strong> {{ session.get('job') }}</p>
-      <form action="/logout" method="POST" style="display:inline;">
-        <button type="submit" class="logout-btn">Logout</button>
-      </form>
-    </div>
-    
+  <h2>Monthly Overview</h2>
+
+  <div class="overview-cards">
+
+      <div class="card">
+          <h3>Monthly Salary</h3>
+          <p class="salary">₹{{ "%.2f"|format(monthly_salary) }}</p>
+      </div>
+
+      <div class="card">
+          <h3>Total Expenses</h3>
+          <p class="expense">₹{{ "%.2f"|format(monthly_expense) }}</p>
+      </div>
+
+      <div class="card">
+          <h3>Remaining Balance</h3>
+          <p class="balance">₹{{ "%.2f"|format(balance) }}</p>
+      </div>
+
+  </div>
+
+</div>
 
     <!-- Salary Section -->
     <div class="section">
