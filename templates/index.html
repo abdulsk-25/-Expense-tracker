@@ -194,6 +194,95 @@ button:hover{
 .balance{
   color:#16a34a;
 }
+/* DASHBOARD */
+
+.salary-card{
+border-top:5px solid #3b82f6;
+}
+
+.expense-card{
+border-top:5px solid #ef4444;
+}
+
+.balance-card{
+border-top:5px solid #22c55e;
+}
+
+.card{
+position:relative;
+overflow:hidden;
+}
+
+.card::before{
+content:'';
+position:absolute;
+width:120%;
+height:120%;
+background:linear-gradient(
+135deg,
+transparent,
+rgba(255,255,255,.3),
+transparent
+);
+
+top:-100%;
+left:-100%;
+transition:.7s;
+}
+
+.card:hover::before{
+top:100%;
+left:100%;
+}
+
+.budget-box{
+
+margin-top:30px;
+background:white;
+padding:25px;
+border-radius:18px;
+box-shadow:0 5px 15px rgba(0,0,0,.08);
+
+}
+
+.budget-text{
+display:flex;
+justify-content:space-between;
+font-weight:600;
+margin-bottom:12px;
+}
+
+.progress{
+
+height:18px;
+background:#e2e8f0;
+border-radius:20px;
+overflow:hidden;
+
+}
+
+.progress-fill{
+
+height:100%;
+border-radius:20px;
+
+background:linear-gradient(
+90deg,
+#14b8a6,
+#06b6d4,
+#3b82f6
+);
+
+animation:loadBar 1.5s ease;
+}
+
+@keyframes loadBar{
+
+from{
+width:0;
+}
+
+}
 
 /* CHART + TABLE */
 
@@ -284,26 +373,83 @@ tr:hover{
     <h1>Expense Tracker</h1>
 <div class="overview">
 
-  <h2>Monthly Overview</h2>
+ <!-- IMPROVED MONTHLY OVERVIEW -->
 
-  <div class="overview-cards">
+<div class="overview">
 
-      <div class="card">
-          <h3>Monthly Salary</h3>
-          <p class="salary">₹{{ "%.2f"|format(monthly_salary) }}</p>
-      </div>
+<h2>📊 Monthly Dashboard</h2>
 
-      <div class="card">
-          <h3>Total Expenses</h3>
-          <p class="expense">₹{{ "%.2f"|format(monthly_expense) }}</p>
-      </div>
+<div class="overview-cards">
 
-      <div class="card">
-          <h3>Remaining Balance</h3>
-          <p class="balance">₹{{ "%.2f"|format(balance) }}</p>
-      </div>
+<div class="card salary-card">
+<h3>💰 Monthly Salary</h3>
+<p class="salary">₹{{ "%.2f"|format(monthly_salary) }}</p>
+</div>
 
-  </div>
+<div class="card expense-card">
+<h3>💸 Total Expenses</h3>
+<p class="expense">₹{{ "%.2f"|format(monthly_expense) }}</p>
+</div>
+
+<div class="card balance-card">
+<h3>🏦 Remaining Balance</h3>
+<p class="balance">
+₹{{ "%.2f"|format(balance) }}
+</p>
+</div>
+
+<div class="card">
+<h3>📈 Savings Rate</h3>
+<p style="color:#0ea5e9">
+{{ ((balance/monthly_salary)*100)|round(1) if monthly_salary>0 else 0 }}%
+</p>
+</div>
+
+<div class="card">
+<h3>🧾 Transactions</h3>
+<p style="color:#8b5cf6">
+{{ expenses|length }}
+</p>
+</div>
+
+<div class="card">
+<h3>📅 Daily Avg Expense</h3>
+<p style="color:#f59e0b">
+₹{{ (monthly_expense/30)|round(2) }}
+</p>
+</div>
+
+</div>
+
+<!-- Budget Progress -->
+
+<div class="budget-box">
+
+<div class="budget-text">
+
+<span>Budget Usage</span>
+
+<span>
+₹{{ "%.0f"|format(monthly_expense) }}
+/
+₹{{ "%.0f"|format(monthly_salary) }}
+</span>
+
+</div>
+
+<div class="progress">
+
+<div
+class="progress-fill"
+style="width:
+{{ ((monthly_expense/monthly_salary)*100) if monthly_salary>0 else 0 }}%">
+</div>
+
+</div>
+
+</div>
+
+</div>
 
 </div>
 
@@ -359,34 +505,60 @@ tr:hover{
 
     <!-- Flex layout: Chart + Expenses Table -->
     <div class="flex-display">
-      <!-- Financial Chart -->
-      <div class="chart-container">
-        <h2>Financial Chart</h2>
-        <label for="chartType">Select Chart Type:</label>
-        <select id="chartType">
-          <option value="bar">Bar</option>
-          <option value="pie">Pie</option>
-          <option value="line">Line</option>
-        </select>
-        <canvas id="financeChart" height="250"></canvas>
-      </div>
 
-      <!-- All Expenses Table -->
-      <div class="expense-table">
-        <h2>All Expenses</h2>
-        <div style="overflow-x:auto;">
-          <table>
-            <tr><th>Amount</th><th>Category</th><th>Date</th></tr>
-            {% for e in expenses %}
-            <tr>
-              <td>₹{{ "%.2f"|format(e[1]) }}</td>
-              <td>{{ e[2] }}</td>
-              <td>{{ e[3] }}</td>
-            </tr>
-            {% endfor %}
-          </table>
-        </div>
-      </div>
+  <!-- Financial Chart -->
+  <div class="chart-container">
+
+    <h2>Financial Chart</h2>
+
+    <label for="chartType">Select Chart Type:</label>
+
+    <select id="chartType">
+      <option value="bar">Bar</option>
+      <option value="pie">Pie</option>
+      <option value="line">Line</option>
+    </select>
+
+    <canvas id="financeChart" height="250"></canvas>
+
+  </div>
+
+  <!-- Expense Category Chart -->
+  <div class="chart-container">
+
+    <h2>Expense Categories</h2>
+
+    <canvas id="categoryChart" height="250"></canvas>
+
+  </div>
+
+  <!-- All Expenses Table -->
+  <div class="expense-table">
+
+    <h2>All Expenses</h2>
+
+    <div style="overflow-x:auto;">
+      <table>
+        <tr>
+          <th>Amount</th>
+          <th>Category</th>
+          <th>Date</th>
+        </tr>
+
+        {% for e in expenses %}
+        <tr>
+          <td>₹{{ "%.2f"|format(e[1]) }}</td>
+          <td>{{ e[2] }}</td>
+          <td>{{ e[3] }}</td>
+        </tr>
+        {% endfor %}
+
+      </table>
+    </div>
+
+  </div>
+
+</div>
     </div>
 
     <!-- Chart.js CDN -->
@@ -447,6 +619,41 @@ tr:hover{
           } : {}
         };
       }
+      new Chart(
+document.getElementById('categoryChart'),
+{
+type:'doughnut',
+data:{
+labels:[
+'Food',
+'Transport',
+'Rent',
+'Entertainment',
+'Shopping',
+'Medical',
+'Education',
+'Bills',
+'Other'
+],
+
+datasets:[{
+
+data:[
+{{ food }},
+{{ transport }},
+{{ rent }},
+{{ entertainment }},
+{{ shopping }},
+{{ medical }},
+{{ education }},
+{{ bills }},
+{{ other }}
+]
+
+}]
+}
+}
+)
 
       document.getElementById('dateInput').valueAsDate = new Date();
     </script>
